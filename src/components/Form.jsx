@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 
 const Field = styled.div`
@@ -45,11 +45,25 @@ const Button = styled.button`
 const Form = () => {
     const years = Array.from(Array(10), (_, i) => i + 1);
 
+    const [data, setData] = useState({
+        brand: '', year: '', plan: ''
+    });
+
+    const handleChange = e => {
+        setData({
+            ...data, [e.target.name]: e.target.value
+        });
+    }
+
     return ( 
         <form>
             <Field>
                 <Label>Marca</Label>
-                <Select name="brand">
+                <Select
+                    name="brand"
+                    value={data.brand}
+                    onChange={handleChange}
+                >
                     <option value="">-- Seleccionar --</option>
                     <option value="americano">Americano</option>
                     <option value="europeo">Europeo</option>
@@ -58,7 +72,11 @@ const Form = () => {
             </Field>
             <Field>
                 <Label>Año</Label>
-                <Select name="year">
+                <Select
+                    name="year"
+                    value={data.year}
+                    onChange={handleChange}
+                >
                     <option value="">-- Seleccionar --</option>
                     {years.map(year => (
                         <option key={year} value={year}>{year}</option>
@@ -67,8 +85,20 @@ const Form = () => {
             </Field>
             <Field>
                 <Label>Plan</Label>
-                <InputRadio type="radio" name="plan" value='basic' />Basico
-                <InputRadio type="radio" name="plan" value='full' />Completo
+                <InputRadio
+                    type="radio"
+                    name="plan"
+                    value='basic'
+                    checked={data.plan === 'basic'}
+                    onChange={handleChange}
+                />Basico
+                <InputRadio
+                    type="radio"
+                    name="plan"
+                    value='full'
+                    checked={data.plan === 'full'}
+                    onChange={handleChange}
+                    />Completo
             </Field>
             <Button type='button'>Cotizar</Button>
         </form>
