@@ -41,6 +41,15 @@ const Button = styled.button`
     }
 `;
 
+const Error = styled.div`
+    background-color: red;
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+`;
+
 
 const Form = () => {
     const years = Array.from(Array(10), (_, i) => i + 1);
@@ -49,14 +58,28 @@ const Form = () => {
         brand: '', year: '', plan: ''
     });
 
+    const [error, setError] = useState(false);
+
     const handleChange = e => {
         setData({
             ...data, [e.target.name]: e.target.value
         });
     }
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        const {brand, plan, year} = data;
+        if (brand.trim() === '' || year.trim() === '' || plan.trim() === '') {
+            setError(true);
+            return;
+        }
+
+        setError(false);
+    }
+
     return ( 
-        <form>
+        <form onSubmit={handleSubmit}>
+            {error ? <Error>Todos los campos son obligatorios</Error> : null}
             <Field>
                 <Label>Marca</Label>
                 <Select
@@ -100,7 +123,7 @@ const Form = () => {
                     onChange={handleChange}
                     />Completo
             </Field>
-            <Button type='button'>Cotizar</Button>
+            <Button typ='submit'>Cotizar</Button>
         </form>
      );
 }
