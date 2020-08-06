@@ -21,3 +21,7 @@ export const calculateTyple = (plan) => {
 
     return equivalentType[plan];
 }
+
+export const firstUpperCase = (text) => (
+    text.charAt(0).toUpperCase() + text.slice(1)
+);

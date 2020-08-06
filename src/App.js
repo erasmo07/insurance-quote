@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import Header from './components/Header';
 import Form from './components/Form';
+import Summary from './components/Summary';
 
 const Container = styled.div`
   max-width: 600px;
@@ -15,13 +16,19 @@ const ContainerForm = styled.div`
 `;
 
 function App() {
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState({
+    quotation: '',
+    data: {
+      brand: '', year: '', type: ''
+    }
+  });
 
   return (
     <Container>
       <Header title='Cotizador de seguros'/>
       <ContainerForm>
         <Form setResult={setResult}/>
+        <Summary data={result.data}/>
       </ContainerForm>
     </Container>
   );
