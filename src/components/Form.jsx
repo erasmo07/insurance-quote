@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
+
+
 import {
     calculateDiferentYear,
     calculateByBrand,
@@ -142,6 +145,10 @@ const Form = ({setResult}) => {
             <Button typ='submit'>Cotizar</Button>
         </form>
      );
+}
+
+Form.propTypes = {
+    setResult: PropTypes.func.isRequired
 }
  
 export default Form;

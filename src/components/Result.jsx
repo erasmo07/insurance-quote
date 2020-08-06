@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 const Message = styled.p`
     background-color: rgb(127, 224, 237);
@@ -39,5 +40,9 @@ const Result = ({quotation}) => {
         
      );
 }
- 
+
+Result.propTypes = {
+    quotation: PropTypes.object.isRequired
+}
+
 export default Result;
