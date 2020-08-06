@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
+import {
+    calculateDiferentYear,
+    calculateByBrand,
+    calculateTyple } from '../helpers';
 
 const Field = styled.div`
     display: flex;
@@ -51,8 +55,9 @@ const Error = styled.div`
 `;
 
 
-const Form = () => {
-    const years = Array.from(Array(10), (_, i) => i + 1);
+const Form = ({setResult}) => {
+    const actualYear = new Date().getFullYear();
+    const years = Array.from(Array(10), (_, i) => actualYear - i);
 
     const [data, setData] = useState({
         brand: '', year: '', plan: ''
@@ -75,6 +80,17 @@ const Form = () => {
         }
 
         setError(false);
+
+        let baseAmount = 2000;
+
+        const diferentYear = calculateDiferentYear(year);
+
+        baseAmount -= ((diferentYear * 3) * baseAmount) / 100;
+        baseAmount = calculateByBrand(brand) * baseAmount;
+
+        let incremento = calculateTyple(plan)
+        let quotation = parseFloat(baseAmount * incremento).toFixed(2);
+        setResult({quotation, data})
     }
 
     return ( 

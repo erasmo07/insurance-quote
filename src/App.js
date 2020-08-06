@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 import Header from './components/Header';
@@ -15,11 +15,13 @@ const ContainerForm = styled.div`
 `;
 
 function App() {
+  const [result, setResult] = useState({});
+
   return (
     <Container>
       <Header title='Cotizador de seguros'/>
       <ContainerForm>
-        <Form />
+        <Form setResult={setResult}/>
       </ContainerForm>
     </Container>
   );
