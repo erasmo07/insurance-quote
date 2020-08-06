@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import Header from './components/Header';
 import Form from './components/Form';
 import Summary from './components/Summary';
+import Result from './components/Result';
 
 const Container = styled.div`
   max-width: 600px;
@@ -17,7 +18,7 @@ const ContainerForm = styled.div`
 
 function App() {
   const [result, setResult] = useState({
-    quotation: '',
+    quotation: 0,
     data: {
       brand: '', year: '', type: ''
     }
@@ -29,6 +30,7 @@ function App() {
       <ContainerForm>
         <Form setResult={setResult}/>
         <Summary data={result.data}/>
+        <Result quotation={result.quotation} />
       </ContainerForm>
     </Container>
   );
